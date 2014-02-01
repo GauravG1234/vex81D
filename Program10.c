@@ -311,7 +311,7 @@ task autonomous()
 
 //Finding the position and setting it to true
 
-
+ /*
     if (SensorValue[FrontSonar] > 3 && SensorValue[FrontSonar] < 12)
     {
         isindeadzone = true;
@@ -328,7 +328,7 @@ task autonomous()
     {
         isred = true;
     }
-    
+    */
 
 
     /*
