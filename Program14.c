@@ -321,6 +321,41 @@ void turnLeftAmount(int amount)
 	  	turnLeft();
 	  }
 }
+
+void moveStraightForDist(float rotations = 1.0)
+{
+  SensorValue[RightEncoder] = 0;
+  SensorValue[LeftEncoder] = 0;
+
+  while(SensorValue[rightEncoderPort] < (abs(rotations) * 360))
+  {
+		if(SensorValue[rightEncoderPort] == SensorValue[leftEncoderPort]) // If rightEncoder has counted the same amount as leftEncoder:
+		{
+			// Move Forward
+			motor[LeftSideFront] = 127;
+			motor[LeftSideBack]  = 127;
+		  motor[RightSideFront] = 127;
+		  motor[RightSideBack] 127;
+		}
+		else if(SensorValue[rightEncoderPort] > SensorValue[leftEncoderPort])	// If rightEncoder has counted more encoder counts
+		{
+			// Turn slightly right
+			motor[LeftSideFront] = 127;
+			motor[LeftSideBack]  = 127;
+		  motor[RightSideFront] = 100;
+		  motor[RightSideBack] 100;
+		}
+		else	// Only runs if leftEncoder has counted more encoder counts
+		{
+			// Turn slightly left
+			motor[LeftSideFront] = 100;
+			motor[LeftSideBack]  = 100;
+		  motor[RightSideFront] = 127;
+		  motor[RightSideBack] 127;
+		}
+		wait1Msec(1);
+  }
+}
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                              //
 //                          Pre-Autonomous Functions                                            //
