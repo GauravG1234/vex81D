@@ -1,5 +1,9 @@
 #pragma config(Sensor, in1,    LeftPoteniometer, sensorPotentiometer)
+#pragma config(Sensor, in2,    LeftEncoder,    sensorAnalog)
+#pragma config(Sensor, in3,    LightSensor,    sensorReflection)
+#pragma config(Sensor, in7,    RightEncoder,   sensorAnalog)
 #pragma config(Sensor, in8,    RightPoteniometer, sensorPotentiometer)
+#pragma config(Sensor, dgtl11, FrontSonar,     sensorSONAR_inch)
 #pragma config(Motor,  port1,           RightSideBack, tmotorServoContinuousRotation, openLoop, reversed)
 #pragma config(Motor,  port2,           RightSideFront, tmotorServoContinuousRotation, openLoop)
 #pragma config(Motor,  port3,           RightArm,      tmotorServoContinuousRotation, openLoop, reversed)
@@ -17,7 +21,7 @@
 #pragma userControlDuration(120)
 
 #include "Vex_Competition_Includes.c"   //Main competition background code...do not modify!
-//This is a random comment
+
 
 ////////////////////////////////////////////////////////////
 int wheels_deadband = 15;
@@ -38,156 +42,156 @@ int robot_rotate    = 0, robot_fwd_rev = 0, robot_translate = 0;
 //Define tasks
 void stopWheels()
 {
-	motor[LeftSideFront]  = stopped;
-	motor[LeftSideBack]   = stopped;
-	motor[RightSideFront] = stopped;
-	motor[RightSideBack]  = stopped;
+    motor[LeftSideFront]  = stopped;
+    motor[LeftSideBack]   = stopped;
+    motor[RightSideFront] = stopped;
+    motor[RightSideBack]  = stopped;
 }
 
 void stopArms()
 {
-	motor[RightArm] = stopped;
-	motor[LeftArm]  = stopped;
+    motor[RightArm] = stopped;
+    motor[LeftArm]  = stopped;
 }
 
 void moveForward(int speed)
 {
-	motor[LeftSideFront]  = speed;
-	motor[LeftSideBack]   = speed;
-	motor[RightSideFront] = speed;
-	motor[RightSideBack]  = speed;
+    motor[LeftSideFront]  = speed;
+    motor[LeftSideBack]   = speed;
+    motor[RightSideFront] = speed;
+    motor[RightSideBack]  = speed;
 }
 
 void moveForwardTimed(int t, int speed)
 {
-	moveForward(speed);
-	wait1Msec(t);
-	stopWheels();
+    moveForward(speed);
+    wait1Msec(t);
+    stopWheels();
 }
 
 void moveBack(int speed)
 {
-	motor[LeftSideFront]  = speed;
-	motor[LeftSideBack]   = speed;
-	motor[RightSideFront] = speed;
-	motor[RightSideBack]  = speed;
+    motor[LeftSideFront]  = speed;
+    motor[LeftSideBack]   = speed;
+    motor[RightSideFront] = speed;
+    motor[RightSideBack]  = speed;
 }
 
 void moveBackTimed(int t, int speed)
 {
-	moveBack(speed);
-	wait1Msec(t);
-	stopWheels();
+    moveBack(speed);
+    wait1Msec(t);
+    stopWheels();
 }
 
 void moveLeft(int speed)
 {
-	motor[LeftSideFront]  = -speed;
-	motor[LeftSideBack]   = speed;
-	motor[RightSideFront] = speed;
-	motor[RightSideBack]  = -speed;
+    motor[LeftSideFront]  = -speed;
+    motor[LeftSideBack]   = speed;
+    motor[RightSideFront] = speed;
+    motor[RightSideBack]  = -speed;
 }
 
 void moveLeftTimed(int t, int speed)
 {
-	moveLeft(speed);
-	wait1Msec(t);
-	stopWheels();
+    moveLeft(speed);
+    wait1Msec(t);
+    stopWheels();
 }
 
 void moveRight(int speed)
 {
-	motor[LeftSideFront]  = -speed;
-	motor[LeftSideBack]   = speed;
-	motor[RightSideFront] = speed;
-	motor[RightSideBack]  = -speed;
+    motor[LeftSideFront]  = -speed;
+    motor[LeftSideBack]   = speed;
+    motor[RightSideFront] = speed;
+    motor[RightSideBack]  = -speed;
 }
 
 void moveRightTimed(int t, int speed)
 {
-	moveRight(speed);
-	wait1Msec(t);
-	stopWheels();
+    moveRight(speed);
+    wait1Msec(t);
+    stopWheels();
 }
 
 void turnRight()
 {
-	motor[LeftSideFront]  = fullspeed;
-	motor[LeftSideBack]   = fullspeed;
-	motor[RightSideFront] = -fullspeed;
-	motor[RightSideBack]  = -fullspeed;
+    motor[LeftSideFront]  = fullspeed;
+    motor[LeftSideBack]   = fullspeed;
+    motor[RightSideFront] = -fullspeed;
+    motor[RightSideBack]  = -fullspeed;
 }
 
 void turnRightTimed(int t)
 {
-	turnRight();
-	wait1Msec(t);
-	stopWheels();
+    turnRight();
+    wait1Msec(t);
+    stopWheels();
 }
 
 void turnLeft()
 {
-	motor[LeftSideFront]  = -fullspeed;
-	motor[LeftSideBack]   = -fullspeed;
-	motor[RightSideFront] = fullspeed;
-	motor[RightSideBack]  = fullspeed;
+    motor[LeftSideFront]  = -fullspeed;
+    motor[LeftSideBack]   = -fullspeed;
+    motor[RightSideFront] = fullspeed;
+    motor[RightSideBack]  = fullspeed;
 }
 
 void turnLeftTimed(int t)
 {
-	turnLeft();
-	wait1Msec(t);
-	stopWheels();
+    turnLeft();
+    wait1Msec(t);
+    stopWheels();
 }
 
 void raiseArms()
 {
-	motor[LeftArm]  = fullspeed;
-	motor[RightArm] = fullspeed;
+    motor[LeftArm]  = fullspeed;
+    motor[RightArm] = fullspeed;
 }
 
 void raiseArmsTimed(int t)
 {
-	raiseArms();
-	wait1Msec(t);
-	stopArms();
+    raiseArms();
+    wait1Msec(t);
+    stopArms();
 }
 
 void lowerArms()
 {
-	motor[LeftArm]  = -fullspeed;
-	motor[RightArm] = -fullspeed;
+    motor[LeftArm]  = -fullspeed;
+    motor[RightArm] = -fullspeed;
 }
 
 void lowerArmsTimed(int t)
 {
-	lowerArms();
-	wait1Msec(t);
-	stopArms();
+    lowerArms();
+    wait1Msec(t);
+    stopArms();
 }
 void IntakeSystemIn()
 {
-	motor[IntakeSystem] = fullspeed;
+    motor[IntakeSystem] = fullspeed;
 }
 void IntakeSystemOut()
 {
-	motor[IntakeSystem] = -fullspeed;
+    motor[IntakeSystem] = -fullspeed;
 }
 void IntakeSystemStop()
 {
-	motor[IntakeSystem] = stopped;
+    motor[IntakeSystem] = stopped;
 }
 void IntakeSystemInTimed(int t)
 {
-	IntakeSystemIn(); 
-	wait1Msec(t);
-	IntakeSystemStop();
+    IntakeSystemIn();
+    wait1Msec(t);
+    IntakeSystemStop();
 }
 void IntakeSystemOutTimed(int t)
 {
-	IntakeSystemOut();
-	wait1Msec(t);
-	IntakeSystemStop();
+    IntakeSystemOut();
+    wait1Msec(t);
+    IntakeSystemStop();
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                              //
@@ -204,54 +208,73 @@ void pre_auton()
   // Example: clearing encoders, setting servo positions, ...
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
-//
-//                                 Autonomous Task
-//
-// This task is used to control your robot during the autonomous phase of a VEX Competition.
-// You must modify the code to add your own robot specific commands here.
-//
-/////////////////////////////////////////////////////////////////////////////////// :D
+//////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                          //                                       
+//                                 Autonomous Task                                          //
+//                                                                                          //                                        
+// This task is used to control your robot during the autonomous phase of a VEX Competition.//
+// You must modify the code to add your own robot specific commands here.                   //
+//                                                                                          //
+////////////////////////////////////////////////////////////////////////////////////////////// 
 
 
 task autonomous()
 {
-	bool inRedDeadZone  = false;
-	bool inRedMidZone   = false;
-	bool inBlueDeadZone = false;
-	bool inBlueMidZone  = false;
-  bool isindeadzone = false;
-  bool isred = false;
-	bool isblue = false;
-	bool isinmiddlezone = false;
-int LeftPoteniometerLimit_32 = 0, RightPoteniometerLimit_32    = 2925;
-int LeftPoteniometerLimit_20 = 1212, RightPoteniometerLimit_20 = 2150;
-int LeftPoteniometerLimit_10 = 650, RightPoteniometerLimit_10  = 1600;
-int LeftPoteniometerLimit_0  = 0, RightPoteniometerLimit_0    = 1330;
-int LeftPoteniometerDesired  = 0, RightPoteniometerDesired    = 0;
-int armdeadband = 200; 	
+    bool inRedDeadZone       = false;
+    bool inRedMidZone        = false;
+    bool inBlueDeadZone      = false;
+    bool inBlueMidZone       = false;
+    bool isindeadzone        = false;
+    bool isred               = false;
+    bool isblue              = false;
+    bool isinmiddlezone      = false;
+
 //Finding the position and setting it to true
 
-if (isindeadzone && isred)
-{
-  	inRedDeadZone = true;
-}
-else if (isindeadzone && isblue)
-{
-		inBlueDeadZone = true;
-}
-else if (isinmiddlezone && isred)
-{
-		inRedMidZone = true;
-}
-else if (isinmiddlezone && isblue)
-{
-		inBlueMidZone = true;
-}	
-	
-	
-	if (inRedDeadZone)
-	{
+    if (SensorValue[FrontSonar] > 3 && SensorValue[FrontSonar] < 12)
+    {
+        isindeadzone = true;
+    }
+    else if (SensorValue[FrontSonar] > 12) 
+    {
+            isinmiddlezone = true;
+    }
+    if (SensorValue[LightSensor] == 1)
+    {
+        isblue = true;
+    }
+    else if (SensorValue[LightSensor] == 0)
+    {
+        isred = true;
+    }
+    
+
+
+
+
+
+
+
+    if (isindeadzone && isred)
+    {
+        inRedDeadZone = true;
+    }
+    else if (isindeadzone && isblue)
+    {
+        inBlueDeadZone = true;
+    }
+    else if (isinmiddlezone && isred)
+    {
+        inRedMidZone = true;
+    }
+    else if (isinmiddlezone && isblue)
+    {
+        inBlueMidZone = true;
+    }
+
+
+  if (inRedDeadZone)
+  {
     //ROBOT DIRECTION: FORWARD
     moveRightTimed(onesecond, fullspeed);
     moveForwardTimed(onesecond, fullspeed);
@@ -264,7 +287,7 @@ else if (isinmiddlezone && isblue)
   }
   else if (inRedMidZone)
   {
-  	//ROBOT DIRECTION: FORWARD
+    //ROBOT DIRECTION: FORWARD
     moveForwardTimed(threeseconds, fullspeed);
     moveLeftTimed(halfsecond, fullspeed);
     turnRightTimed(onesecond);
@@ -284,7 +307,7 @@ else if (isinmiddlezone && isblue)
   }
   else if (inBlueDeadZone)
   {
-  	//ROBOT DIRECTION: FORWARD
+    //ROBOT DIRECTION: FORWARD
     moveLeftTimed(onesecond, fullspeed);
     moveForwardTimed(onesecond, fullspeed);
     moveRightTimed(threeseconds, fullspeed);
@@ -296,7 +319,7 @@ else if (isinmiddlezone && isblue)
   }
   else
   {
-  	//THIS IS ERROR AUTONOMOUS.  THIS ONLY HAPPENS IF THE ROBOT ISN'T FACING THE RIGHT WAY OR CAN'T DETECT WHERE IT IS
+    //THIS IS ERROR AUTONOMOUS.  THIS ONLY HAPPENS IF THE ROBOT ISN'T FACING THE RIGHT WAY OR CAN'T DETECT WHERE IT IS
     moveForwardTimed(onesecond, fullspeed);
     moveBackTimed(onesecond,fullspeed);
     moveForwardTimed(onesecond, fullspeed);
@@ -312,115 +335,123 @@ else if (isinmiddlezone && isblue)
     moveForwardTimed(onesecond, fullspeed);
     moveBackTimed(onesecond,fullspeed);
   }
-}
+
 // ARM AUTOMATIC SYSTEM
-/*
-if (LeftPoteniometerDesired > SensorValue[LeftPoteniometer])
+      int LeftPoteniometerLimit_32 = 0, RightPoteniometerLimit_32    = 2925;
+      int LeftPoteniometerLimit_20 = 1212, RightPoteniometerLimit_20 = 2150;
+      int LeftPoteniometerLimit_10 = 650, RightPoteniometerLimit_10  = 1600;
+      int LeftPoteniometerLimit_0  = 0, RightPoteniometerLimit_0    = 1330;
+      int LeftPoteniometerDesired  = 0, RightPoteniometerDesired    = 0;
+      int armdeadband = 200;
+
+
+      if (LeftPoteniometerDesired > SensorValue[LeftPoteniometer])
       {
-        motor[RightArm] = 127;
-        motor[LeftArm]  = 127;
+        motor[RightArm] = fullspeed;
+        motor[LeftArm]  = fullspeed;
       }
       else if (LeftPoteniometerDesired < SensorValue[LeftPoteniometer])
       {
-        motor[RightArm] = -127;
-        motor[LeftArm]  = -127;
+        motor[RightArm] = -fullspeed;
+        motor[LeftArm]  = -fullspeed;
       }
       else if (abs(LeftPoteniometerDesired - SensorValue[LeftPoteniometer]) <armdeadband)
       {
         motor[RightArm] = 0;
         motor[LeftArm]  = 0;
       }
+      // Buttons to change the Desired height
       if (vexRT[Btn8UXmtr2]  == 1)
       {
         LeftPoteniometerDesired  = LeftPoteniometerLimit_32;
-        rightSensorDesired = rightSensorLimit_32;
+        RightPoteniometerDesired = RightPoteniometerLimit_32;
         armdeadband = 200;
       }
 
       if (vexRT[Btn8DXmtr2]  == 1)
       {
         LeftPoteniometerDesired  = LeftPoteniometerLimit_0;
-        PoteniometerSensorDesired = rightPoteniometerLimit_0;
+        RightPoteniometerDesired = RightPoteniometerLimit_0;
         armdeadband = 50;
       }
       if (vexRT[Btn8LXmtr2]  == 1)
       {
         LeftPoteniometerDesired  = LeftPoteniometerLimit_10;
-        rightPoteniometerDesired = rightPoteniometerLimit_10;
+        RightPoteniometerDesired = RightPoteniometerLimit_10;
         armdeadband = 200;
       }
-    
 
 
+}
 
-*/
-/////////////////////////////////////////////////////////////////////////////////////////
-//
-//                                 User Control Task
-//
-// This task is used to control your robot during the user control phase of a VEX Competition.
-// You must modify the code to add your own robot specific commands here.
-//
-/////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////User Control Task///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// This task is used to control your robot during the user control phase of a VEX Competition.////////
+// You must modify the code to add your own robot specific commands here./////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 task usercontrol()
 {
   // Loop Forever
   while (true)
   {
-  	/*
+    /*
     if(vexRT[Ch2] > wheels_deadband)
     {
-    	moveForward(vexRT[Ch2]);
+        moveForward(vexRT[Ch2]);
     }
 
     if(vexRT[Ch2] < -wheels_deadband)
     {
-    	moveBack(vexRT[Ch2]);
+        moveBack(vexRT[Ch2]);
     }
 
     if(vexRT[Ch1] > wheels_deadband)
     {
-    	turnRight();
+        turnRight();
     }
 
     if(vexRT[Ch1] < -wheels_deadband)
     {
-    	turnLeft();
+        turnLeft();
     }
 
     if(vexRT[Ch4] > wheels_deadband)
     {
-    	moveRight(vexRT[Ch4]);
+        moveRight(vexRT[Ch4]);
     }
 
     if(vexRT[Ch4] < -wheels_deadband)
     {
-  	  moveLeft(vexRT[Ch4]);
-  	}
-  	*/
-  	//These are the arms controls (Call of Duty trigger buttons)
+      moveLeft(vexRT[Ch4]);
+    }
+    */
+    //These are the arms controls (Call of Duty trigger buttons)
 
 
-  	if(vexRT[Btn6U] == pressed)
-  	{
-  		raiseArms();
+    if(vexRT[Btn6U] == pressed)
+    {
+        raiseArms();
     }
 
     if(vexRT[Btn6D] == pressed)
     {
-    	lowerArms();
+        lowerArms();
     }
 
     if(vexRT[Btn5U] == pressed)
     {
-    	raiseArms();
+        raiseArms();
     }
 
     if(vexRT[Btn5D] == pressed)
     {
-  	  lowerArms();
-  	}
+      lowerArms();
+    }
 motor[LeftArm] = 50;
 motor[RightArm] = 50;
 
@@ -436,7 +467,7 @@ motor[RightArm] = 50;
     //Create "deadzone" for robot_rotate/Ch1
     if(abs(vexRT[Ch1]) > wheels_deadband)
       robot_rotate = vexRT[Ch1];
-    else
+   else
       robot_rotate = 0;
     //Remote Control Commands
     motor[LeftSideFront]  = robot_fwd_rev + robot_translate + robot_rotate;
