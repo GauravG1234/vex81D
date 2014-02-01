@@ -19,7 +19,7 @@
 #include "Vex_Competition_Includes.c"   //Main competition background code...do not modify!
 //This is a random comment
 
-//////////////////////////////////////////////////////////// Random Text
+////////////////////////////////////////////////////////////
 int wheels_deadband = 15;
 int fullspeed       = 127;
 int halfspeed       = 63;
