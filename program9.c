@@ -293,12 +293,7 @@ task autonomous()
     }
     
 
-
-
-
-
-
-
+    /*
     if (isindeadzone && isred)
     {
         inRedDeadZone = true;
@@ -315,7 +310,7 @@ task autonomous()
     {
         inBlueMidZone = true;
     }
-
+    */
 
   if (inRedDeadZone)
   {
