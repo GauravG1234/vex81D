@@ -403,20 +403,20 @@ task autonomous()
         stopArms();
       }
       // Buttons to change the Desired height
-      if (vexRT[Btn8UXmtr2]  == 1)
+      if (vexRT[Btn8UXmtr2]  == pressed)
       {
         LeftPoteniometerDesired  = LeftPoteniometerLimit_32;
         RightPoteniometerDesired = RightPoteniometerLimit_32;
         armdeadband = 200;
       }
 
-      if (vexRT[Btn8DXmtr2]  == 1)
+      if (vexRT[Btn8DXmtr2]  == pressed)
       {
         LeftPoteniometerDesired  = LeftPoteniometerLimit_0;
         RightPoteniometerDesired = RightPoteniometerLimit_0;
         armdeadband = 50;
       }
-      if (vexRT[Btn8LXmtr2]  == 1)
+      if (vexRT[Btn8LXmtr2]  == pressed)
       {
         LeftPoteniometerDesired  = LeftPoteniometerLimit_10;
         RightPoteniometerDesired = RightPoteniometerLimit_10;
