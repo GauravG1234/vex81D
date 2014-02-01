@@ -398,6 +398,7 @@ task autonomous()
   else
   {
     //THIS IS ERROR AUTONOMOUS.  THIS ONLY HAPPENS IF THE ROBOT ISN'T FACING THE RIGHT WAY OR CAN'T DETECT WHERE IT IS
+    /*
     moveForwardTimed(onesecond, fullspeed);
     moveBackTimed(onesecond,fullspeed);
     moveForwardTimed(onesecond, fullspeed);
@@ -412,6 +413,7 @@ task autonomous()
     moveBackTimed(onesecond,fullspeed);
     moveForwardTimed(onesecond, fullspeed);
     moveBackTimed(onesecond,fullspeed);
+    */
   }
 
 
@@ -564,4 +566,3 @@ task usercontrol()
     motor[RightSideBack]  = robot_fwd_rev + robot_translate - robot_rotate;
   }
 }
-
