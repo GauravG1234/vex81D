@@ -60,8 +60,6 @@ int armdeadband = 200;
 ////////////////////////////////////////////////////////////
 
 
-
-
 //Define tasks
 void stopWheels()
 {
@@ -71,17 +69,11 @@ void stopWheels()
     motor[RightSideBack]  = stopped;
 }
 
-
-
-
 void stopArms()
 {
     motor[RightArm] = stopped;
     motor[LeftArm]  = stopped;
 }
-
-
-
 
 void moveForward(int speed)
 {
@@ -91,18 +83,12 @@ void moveForward(int speed)
     motor[RightSideBack]  = speed;
 }
 
-
-
-
 void moveForwardTimed(int t, int speed)
 {
     moveForward(speed);
     wait1Msec(t);
     stopWheels();
 }
-
-
-
 
 void moveBack(int speed)
 {
@@ -112,18 +98,12 @@ void moveBack(int speed)
     motor[RightSideBack]  = speed;
 }
 
-
-
-
 void moveBackTimed(int t, int speed)
 {
     moveBack(speed);
     wait1Msec(t);
     stopWheels();
 }
-
-
-
 
 void moveLeft(int speed)
 {
@@ -133,18 +113,12 @@ void moveLeft(int speed)
     motor[RightSideBack]  = -speed;
 }
 
-
-
-
 void moveLeftTimed(int t, int speed)
 {
     moveLeft(speed);
     wait1Msec(t);
     stopWheels();
 }
-
-
-
 
 void moveRight(int speed)
 {
@@ -154,18 +128,12 @@ void moveRight(int speed)
     motor[RightSideBack]  = -speed;
 }
 
-
-
-
 void moveRightTimed(int t, int speed)
 {
     moveRight(speed);
     wait1Msec(t);
     stopWheels();
 }
-
-
-
 
 void turnRight()
 {
@@ -175,18 +143,12 @@ void turnRight()
     motor[RightSideBack]  = -fullspeed;
 }
 
-
-
-
 void turnRightTimed(int t)
 {
     turnRight();
     wait1Msec(t);
     stopWheels();
 }
-
-
-
 
 void turnLeft()
 {
@@ -196,9 +158,6 @@ void turnLeft()
     motor[RightSideBack]  = fullspeed;
 }
 
-
-
-
 void turnLeftTimed(int t)
 {
     turnLeft();
@@ -206,17 +165,11 @@ void turnLeftTimed(int t)
     stopWheels();
 }
 
-
-
-
 void raiseArms()
 {
     motor[LeftArm]  = fullspeed;
     motor[RightArm] = fullspeed;
 }
-
-
-
 
 void raiseArmsTimed(int t)
 {
@@ -225,17 +178,11 @@ void raiseArmsTimed(int t)
     stopArms();
 }
 
-
-
-
 void lowerArms()
 {
     motor[LeftArm]  = -fullspeed;
     motor[RightArm] = -fullspeed;
 }
-
-
-
 
 void lowerArmsTimed(int t)
 {
@@ -243,33 +190,35 @@ void lowerArmsTimed(int t)
     wait1Msec(t);
     stopArms();
 }
+
 void IntakeSystemIn()
 {
     motor[IntakeSystem] = fullspeed;
 }
+
 void IntakeSystemOut()
 {
     motor[IntakeSystem] = -fullspeed;
 }
+
 void IntakeSystemStop()
 {
     motor[IntakeSystem] = stopped;
 }
+
 void IntakeSystemInTimed(int t)
 {
     IntakeSystemIn();
     wait1Msec(t);
     IntakeSystemStop();
 }
+
 void IntakeSystemOutTimed(int t)
 {
     IntakeSystemOut();
     wait1Msec(t);
     IntakeSystemStop();
 }
-
-
-
 
 void moveForwardDistance(int dist)
 {
@@ -282,9 +231,6 @@ void moveForwardDistance(int dist)
 	  stopWheels();
 }
 
-
-
-
 void moveBackDistance(int dist)
 {
 	  //Assuming that "dist" is going to be figured out later
@@ -296,9 +242,6 @@ void moveBackDistance(int dist)
 	  stopWheels();
 }
 
-
-
-
 void turnRightAmount(int amount)
 {
 	  //Assuming that "amount" is going to be figured out later
@@ -308,9 +251,6 @@ void turnRightAmount(int amount)
 	  	turnRight();
 	  }
 }
-
-
-
 
 void turnLeftAmount(int amount)
 {
@@ -365,9 +305,6 @@ void moveStraightForDist(float rotations = 1.0)
 //                                                                                              //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
 void pre_auton()
 {
   // All activities that occur before the competition starts
@@ -378,9 +315,6 @@ RightEncoderCounts = 0;
 LeftEncoderCounts = 0;
 }
 
-
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                          //                                       
 //                                 Autonomous Task                                          //
@@ -389,13 +323,6 @@ LeftEncoderCounts = 0;
 // You must modify the code to add your own robot specific commands here.                   //
 //                                                                                          //
 ////////////////////////////////////////////////////////////////////////////////////////////// 
-
-
-
-
-
-
-
 
 task autonomous()
 {
@@ -432,8 +359,6 @@ task autonomous()
         isred = true;
     }
     */
-
-
 
 
     /*
@@ -595,10 +520,6 @@ task usercontrol()
     //Remote Control Commands
     motor[LeftSideFront]  = robot_fwd_rev + robot_translate + robot_rotate;
     motor[LeftSideBack]   = robot_fwd_rev - robot_translate + robot_rotate;
-
-
-
-
     motor[RightSideFront] = robot_fwd_rev - robot_translate - robot_rotate;
     motor[RightSideBack]  = robot_fwd_rev + robot_translate - robot_rotate;
   }
