@@ -17,7 +17,6 @@
 
 
 
-
 //Competition Control and Duration Settings
 #pragma competitionControl(Competition)
 #pragma autonomousDuration(15)
