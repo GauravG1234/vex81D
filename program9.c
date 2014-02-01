@@ -400,8 +400,7 @@ task autonomous()
       }
       else if (abs(LeftPoteniometerDesired - SensorValue[LeftPoteniometer]) <armdeadband)
       {
-        motor[RightArm] = 0;
-        motor[LeftArm]  = 0;
+        stopArms();
       }
       // Buttons to change the Desired height
       if (vexRT[Btn8UXmtr2]  == 1)
@@ -487,8 +486,7 @@ task usercontrol()
     }
     else 
     {
-    	motor[RightArm] = 0;
-    	motor[LeftArm]  = 0;
+    	stopArms();
     }
     // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  
 		if(abs(vexRT[Ch3]) > wheels_deadband)
