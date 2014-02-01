@@ -36,7 +36,9 @@ int tenseconds      = 10000;
 int stopped         = 0;
 int pressed         = 1;
 int robot_rotate    = 0, robot_fwd_rev = 0, robot_translate = 0;
-
+int RightEncoderCounts = SensorValue[RightEncoder];
+int LeftEncoderCounts = SensorValue[LeftEncoder];
+int oneturn = 90;
 ////////////////////////////////////////////////////////////
 
 //Define tasks
@@ -192,6 +194,48 @@ void IntakeSystemOutTimed(int t)
     IntakeSystemOut();
     wait1Msec(t);
     IntakeSystemStop();
+}
+
+void moveForwardDistance(int dist)
+{
+	  //Assuming that "dist" is going to be figured out later
+    //"dist" would be the encoder counts until it stops moving; we can make "onefoot" variables etc. later.
+	  while(RightEncoderCounts <= dist)
+	  {
+	  	moveForward(fullspeed);
+	  }
+	  stopWheels();
+}
+
+void moveBackDistance(int dist)
+{
+	  //Assuming that "dist" is going to be figured out later
+    //"dist" would be the encoder counts until it stops moving; we can make "onefoot" variables etc. later.
+	  while(RightEncoderCounts <= dist)
+	  {
+	  	moveBack(fullspeed);
+	  }
+	  stopWheels();
+}
+
+void turnRightAmount(int amount)
+{
+	  //Assuming that "amount" is going to be figured out later
+    //"amount" would be the left encoder counts until it stops moving
+	  while(LeftEncoderCounts <= amount)
+	  {
+	  	turnRight();
+	  }
+}
+
+void turnLeftAmount(int amount)
+{
+	  //Assuming that "amount" is going to be figured out later
+    //"amount" would be the right encoder counts until it stops moving
+	  while(RightEncoderCounts <= amount)
+	  {
+	  	turnLeft();
+	  }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                              //
