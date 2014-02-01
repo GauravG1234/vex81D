@@ -250,6 +250,8 @@ void pre_auton()
 {
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
+  SensorValue[LeftEncoder] = 0;
+  SensorValue[RightEncoder] = 0;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
