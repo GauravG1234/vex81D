@@ -538,13 +538,14 @@ task usercontrol()
       {
          ArmsRaiseToValue(2240);	
       }
-      
       else if(vexRT[Btn8L] == pressed)
       {
          ArmsRaiseToValue(2835);	 
      	}
-      
-  
+     	else
+     	{
+     		stopArms();
+     	}
     //These are the arms controls (Call of Duty trigger buttons)
     if(vexRT[Btn6U] == pressed)
     {
