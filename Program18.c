@@ -45,6 +45,10 @@ int LeftPoteniometerLimit_10 = 2835, RightPoteniometerLimit_10  = 1600;
 int LeftPoteniometerLimit_0  = 3310, RightPoteniometerLimit_0    = 1330;
 int LeftPoteniometerDesired  = 0, RightPoteniometerDesired    = 0;
 int armdeadband = 200;
+int armsPos1 = 3300;
+int armsPos2 = 2835;
+int armsPos3 = 2240;
+int armsPos4 = 1768;
 ////////////////////////////////////////////////////////////
 
 
@@ -528,19 +532,19 @@ task usercontrol()
   {
       if (vexRT[Btn8D] == pressed)
       {
-         ArmsRaiseToValue(3300);
+         ArmsRaiseToValue(armsPos1);
       }
       else if (vexRT[Btn8U] == pressed)
       {
-         ArmsRaiseToValue(1768);		
+         ArmsRaiseToValue(armsPos4);		
      	}
       else if (vexRT[Btn8R] == pressed)
       {
-         ArmsRaiseToValue(2240);	
+         ArmsRaiseToValue(armsPos3);	
       }
       else if(vexRT[Btn8L] == pressed)
       {
-         ArmsRaiseToValue(2835);	 
+         ArmsRaiseToValue(armsPos2);	 
      	}
      	else
      	{
